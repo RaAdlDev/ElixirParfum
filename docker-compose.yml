@@ -1,0 +1,22 @@
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: elixir_parfum_db
+    volumes:
+      - elixir_parfum_data:/var/lib/postgresql/data
+    restart: always
+    environment:
+      POSTGRES_USER: ${DATABASE_USER}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+      POSTGRES_DB: ${DATABASE_NAME}
+    ports:
+      - "5433:5432"
+    networks:
+      - dev-network
+
+volumes:
+  elixir_parfum_data:
+
+networks:
+  dev-network:
+    external: true
